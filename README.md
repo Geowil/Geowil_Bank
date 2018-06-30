@@ -5,7 +5,7 @@ Demo Available: Yes, [Geowil_BankDemo.zip](http://lmpgames.com/RMMV/Plugins/Geow
 
 Project Available: Yes, [Geowil_BankProject.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_ProjectV1.0.zip)
 
-Conflicts: Maybe, see [Conflicts](https://gitlab.com/Geowil/Geowil_BankPlugin#conflicts) section
+Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/Geowil_BankPlugin#conflicts) section
 
 Terms of Use: Free non-commercially or commercially; just give credit
 
