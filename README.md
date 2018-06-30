@@ -43,10 +43,10 @@ use the same bank across your entire game or have each major location have its o
 
 The plugin commands to open the bank are as follows:
 
-...
+```
 BankOpen <BankID> <InterestRate>
 BankOpen <BankID> <InterestRate> <TimeDenomination>
-...
+```
 
 where <BankID> is the ID for the bank you want to open and <InterestRate> is the interest rate for that bank.
 Future version of the plugin may either remove the InterestRate parameter or add a second BankOpen command that
@@ -104,14 +104,14 @@ I have already gone over a few of these but I will include them again here.
 The very first commands you should know about are used to open a bank.  These will also create the bank if they do not
 already exist or update certain values if the bank does exist and they are different.
 
-...
+```
 BankOpen <BankID> <InterestRate>
 BankOpen <BankID> <InterestRate> <TimeDenomination>
 
 Examples:
 BankOpen 0 10
 BankOpen 1 15 Minutes
-...
+```
 
 The first BankOpen command simply opens a bank with the specified id and with the specified interest rate.  The second one
 will change the default time denomination setting from 'Time Denomination' in the plugin settings to whatever you enter
@@ -121,9 +121,9 @@ for the <TimeDenomination> option.
 #### Adding/Updating Bonds
 The next plugin command allows you to create a new bond at the specifid bank:
 
-...
+```
 Bank <BankID> AddBond <BondInfoID> <Bond Name> <Bond Cost> <Bond Matured Value> <Bond Mature Time> <Bond Help Text>
-...
+```
 Here is a breakdown of what the options are used for:
 
 <BankID> - ID for the bank the bond should be added to.
@@ -134,18 +134,18 @@ Here is a breakdown of what the options are used for:
 <Bond Mature Time> - The amount of time it will take for the bond to fully mature.
 <Bond Help Text> - Sets the help text that will be displayed for the bond in the 'Buy Bond' window.
 
-...
+```
 Example: Bank 0 AddBond 0 Baisc Bond 10 1000 4000 10 This bond will mature after 10 hours.\nGains 20% interest at maturation.
-...
+```
 
 The above example create a new bond information record for bank 0 with the specified values.
 If you want to update an existing bond at a bank use the below plugin command:
 
-...
+```
 Bank <BankID> UpdateBond <BondInfoID> <Bond Name> <Bond Cost> <Bond Matured Value> <Bond Mature Time> <Bond Help Text>
 
 Example: Bank 0 UpdateBond 0 Baisc Bond 10 2000 8000 10 This bond will mature after 10 hours.\nGains 20% interest at maturation.
-...
+```
 
 The above example modified the bond information record we created with the AddBond example at bank 0.
 
