@@ -1,7 +1,7 @@
 # Geowil_Bank Plugin
-Version: 1.0
+Version: 1.0.1
 
-Demo Available: Yes, [Geowil_BankDemo.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_V1.0.zip)
+Demo Available: Yes, [Geowil_BankDemo.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_V1.1.zip)
 
 Project Available: Yes, [Geowil_BankProject.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_ProjectV1.0.zip)
 
@@ -205,5 +205,8 @@ conflict with this plugin without proper integration measures:
 
 
 ## Version Changelogs
+- Version 1.0.1 Changelog:
+  - Fixed an issue with the demo that caused the custom gold changer buttons to not render.
+  
 - Version 1.0.0 Changelog:
   - Initial version of plugin uploaded?
