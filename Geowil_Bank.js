@@ -98,6 +98,8 @@
 * SephirothSpawn - original RMXP script creator
 */
 
+//TODO: make bool param checks against strings and change any onProcessOk to processOk and add in cancel com list handling
+
 
 var Geowil = Geowil || {};
 
@@ -122,9 +124,9 @@ function Window_SellBondDetails() { this.initialize.apply(this,arguments); };
 	var bImmatureColor = String(params['Immature Bond Color']);
 	var gBtn1Value = parseInt(params['Gold Counter Button 1 Value']);
 	var gBtn2Value = parseInt(params['Gold Counter Button 2 Value']);
-	var bAddBondOverwrites = (params['Add Bond Overwrites'] === true) 
+	var bAddBondOverwrites = (params['Add Bond Overwrites'] === "true") 
 	var timeDemo = String(params['Time Denomination'])
-	var bIsBondSysActive = (params['Bond System Active'] === true)
+	var bIsBondSysActive = (params['Bond System Active'] === "true")
 
 
 	/**********
