@@ -274,14 +274,6 @@ Game_Banks.prototype.removeBond = function(bnkID,bnd){
 	* Stores bond details
 	***********
 	*/
-
-	var DataManager_makeSaveContents = DataManager.makeSaveContents;
-	DataManager.makeSaveContents = function() {
-	    // A save data does not contain $gameTemp, $gameMessage, and $gameTroop.
-	    var contents = DataManager_makeSaveContents.call(this);
-	    contents.banks        = $gameBanks; //For GeoWil_BankPlugin
-	    return contents;
-	};
 	
 	function Bond() { this.initialize.apply(this,arguments); };
 	Bond.prototype.initialize = function() { this.initMembers(); };
@@ -331,6 +323,20 @@ Game_Banks.prototype.removeBond = function(bnkID,bnd){
 	DataManager.createGameObjects = function(){
 		DataManager_CreateGameObjects.call(this,arguments);
 		$gameBanks         = new Game_Banks();
+	};
+	
+	var DataManager_makeSaveContents = DataManager.makeSaveContents;
+	DataManager.makeSaveContents = function() {
+	    // A save data does not contain $gameTemp, $gameMessage, and $gameTroop.
+	    var contents = DataManager_makeSaveContents.call(this);
+	    contents.banks        = $gameBanks; //For GeoWil_BankPlugin
+	    return contents;
+	};
+	
+	var DataManager_extractSaveContents = DataManager.extractSaveContents;
+	DataManager.extractSaveContents = function(contents) {
+    		DataManager_extractSaveContents.call(this,contents);
+    		$gameBanks         = contents.banks; //For GeoWil_BankPlugin
 	};
 
 
