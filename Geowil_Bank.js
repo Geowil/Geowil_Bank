@@ -99,10 +99,7 @@
 */
 
 //TODO: make bool param checks against strings and change any onProcessOk to processOk and add in cancel com list handling
-
-
-var Geowil = Geowil || {};
-
+var $gameBanks;
 function Scene_Bank() { this.initialize.apply(this,arguments); };
 function Window_BankDetails() { this.initialize.apply(this,arguments); };
 function Window_ActionPane() { this.initialize.apply(this,arguments); };
@@ -114,9 +111,152 @@ function Window_BuyBondDetails() { this.initialize.apply(this,arguments); };
 function Window_SellBond() { this.initialize.apply(this,arguments); };
 function Window_SellBondDetails() { this.initialize.apply(this,arguments); };
 
+
+//Start Game_Banks for Geowil_Bank Plugin
+function Game_Banks(){
+    this.initialize.apply(this,arguments);
+};
+
+Game_Banks.prototype = Object.create(Object.prototype);
+Game_Banks.prototype.constructor = Game_Banks;
+
+Object.defineProperties(Game_Banks.prototype,{
+    banks: {get: function(){return this._banks;}, configurable: true}
+});
+
+
+Game_Banks.prototype.initialize = function(){
+    this.initMembers();
+};
+
+Game_Banks.prototype.addBank = function(bID, bBalance, bInterest, bLastAccess, bTimeUnit,bIsBondSysActive){
+    if (!this._banks[bID]){
+        this._banks[bID] = {};
+
+        this._banks[bID]["balance"] = bBalance;
+        this._banks[bID]["interest"] = bInterest;
+        this._banks[bID]["lastAccess"]  = bLastAccess;
+        this._banks[bID]["bonds"] = {};
+        this._banks[bID]["bondInfo"] = {};
+        this._banks[bID]["stocks"] = {};
+        this._banks[bID]["timeUnit"] = bTimeUnit
+        this._banks[bID]["bondSystem"] = bIsBondSysActive;
+    }
+};
+
+Game_Banks.prototype.initMembers = function(){
+    this._banks = [];
+};
+
+Game_Banks.prototype.setBalance = function(bID, bBalance){
+    this._banks[bID]["balance"] = bBalance;
+};
+
+Game_Banks.prototype.setInterest = function(bID, bInt){
+    this._banks[bID]["interest"] = bInt;
+};
+
+Game_Banks.prototype.setLastAccess = function(bID, bLAccess){
+    this._banks[bID]["lastAccess"] = bLAccess;
+};
+
+Game_Banks.prototype.setTimeUnit = function(bID, timeUnit){
+    this._banks[bID]["timeUnit"] = timeUnit;
+};
+
+Game_Banks.prototype.changeBondSystem = function(bID,isEnabled) { this._banks[bID]["bondSystem"] = isEnabled; }
+Game_Banks.prototype.getBalance = function(bID){
+    return this._banks[bID]["balance"];
+};
+
+Game_Banks.prototype.getInterest = function(bID){
+    return this._banks[bID]["interest"];
+};
+
+Game_Banks.prototype.getLastAccess = function(bID){
+    return this._banks[bID]["lastAccess"];
+};
+
+Game_Banks.prototype.getTimeUnit = function(bID){
+    return this._banks[bID]["timeUnit"];
+};
+
+Game_Banks.prototype.bIsBndSysActive = function(bID){
+    return this._banks[bID]["bondSystem"] == 1;
+};
+
+Game_Banks.prototype.bankExists = function(bID){
+    return !this._banks[bID] ? false:true;
+};
+
+Game_Banks.prototype.getBank = function(bID){
+    return this._banks[bID];
+};
+
+Game_Banks.prototype.updateBank = function(bID,bank){
+    this._banks[bID] = bank;
+};
+
+Game_Banks.prototype.addBond = function(bID,bndID,bndName,bndCost,bndMVal,bndMTime,bndPRDate){
+    var curBank = this.getBank(bID);
+    curBank["bonds"][bndID] = {};
+
+    curBank["bonds"][bndID]["id"] = bndID;
+    curBank["bonds"][bndID]["name"] = bndName;
+    curBank["bonds"][bndID]["cost"] = bndCost;
+    curBank["bonds"][bndID]["maturedValue"] = bndMVal;
+    curBank["bonds"][bndID]["matureTime"] = bndMTime;
+    curBank["bonds"][bndID]["purchaseDate"] = bndPRDate;
+};
+
+Game_Banks.prototype.addBondInfo = function(bnkID,biID,bndName,bndCost,bndMVal,bndMTime,bndHlpTxt){
+    var curBank = this.getBank(bnkID);
+    curBank["bondInfo"][biID] = {};
+
+    bndHlpTxt = bndHlpTxt.replace("\\n","\n")
+
+    curBank["bondInfo"][biID]["id"] = biID;
+    curBank["bondInfo"][biID]["name"] = bndName;
+    curBank["bondInfo"][biID]["cost"] = bndCost;
+    curBank["bondInfo"][biID]["maturedValue"] = bndMVal;
+    curBank["bondInfo"][biID]["matureTime"] = bndMTime;
+    curBank["bondInfo"][biID]["helpText"] = bndHlpTxt;
+};
+
+Game_Banks.prototype.updateBondInfo = function(bnkID,biID,bndName,bndCost,bndMVal,bndMTime,bndHlpTxt){
+    var curBank = this.getBank(bnkID);
+    curBank["bondInfo"][biID] = {};
+
+    bndHlpTxt = bndHlpTxt.replace("\\n","\n")
+
+    if (curBank["bondInfo"][biID]["id"] != biID) { curBank["bondInfo"][biID]["id"] = biID; }
+    if (curBank["bondInfo"][biID]["name"] != bndName) { curBank["bondInfo"][biID]["name"] = bndName; }
+    if (curBank["bondInfo"][biID]["cost"] != bndCost) { curBank["bondInfo"][biID]["cost"] = bndCost; }
+    if (curBank["bondInfo"][biID]["maturedValue"] != bndMVal) { curBank["bondInfo"][biID]["maturedValue"] = bndMVal; }
+    if (curBank["bondInfo"][biID]["matureTime"] != bndMTime) { curBank["bondInfo"][biID]["matureTime"] = bndMTime; }
+    if (curBank["bondInfo"][biID]["helpText"] != bndHlpTxt) { curBank["bondInfo"][biID]["helpText"] = bndHlpTxt; }
+};
+
+Game_Banks.prototype.bDoBondsExist = function(bnkId){
+    return this._banks[bnkId]["bondInfo"].length > 0 ? true : false;
+};
+
+Game_Banks.prototype.bDoesBondExist = function(bnkId,biId){
+    return this._banks[bnkId]["bondInfo"][biId] != null ? true : false;
+};
+
+Game_Banks.prototype.getBond = function(bnkID,bID){
+    return this._banks[bnkID]["bonds"][bID];
+};
+
+Game_Banks.prototype.removeBond = function(bnkID,bnd){
+    delete this._banks[bnkID]["bonds"][bnd["id"]];
+};
+
+
 (function(_) {
 	"use strict";
-
+	
 	const params = PluginManager.parameters('Geowil_Bank');
 
 	//Param Plugin Var
@@ -134,7 +274,7 @@ function Window_SellBondDetails() { this.initialize.apply(this,arguments); };
 	* Stores bond details
 	***********
 	*/
-
+	
 	function Bond() { this.initialize.apply(this,arguments); };
 	Bond.prototype.initialize = function() { this.initMembers(); };
 	Bond.prototype.createBond = function(bID, bName, bCost,bMValue, bMTime, bPrTime){
@@ -183,6 +323,20 @@ function Window_SellBondDetails() { this.initialize.apply(this,arguments); };
 	DataManager.createGameObjects = function(){
 		DataManager_CreateGameObjects.call(this,arguments);
 		$gameBanks         = new Game_Banks();
+	};
+	
+	var DataManager_makeSaveContents = DataManager.makeSaveContents;
+	DataManager.makeSaveContents = function() {
+	    // A save data does not contain $gameTemp, $gameMessage, and $gameTroop.
+	    var contents = DataManager_makeSaveContents.call(this);
+	    contents.banks        = $gameBanks; //For GeoWil_BankPlugin
+	    return contents;
+	};
+	
+	var DataManager_extractSaveContents = DataManager.extractSaveContents;
+	DataManager.extractSaveContents = function(contents) {
+    		DataManager_extractSaveContents.call(this,contents);
+    		$gameBanks         = contents.banks; //For GeoWil_BankPlugin
 	};
 
 
