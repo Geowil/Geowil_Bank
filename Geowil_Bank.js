@@ -99,7 +99,7 @@
 */
 
 //TODO: make bool param checks against strings and change any onProcessOk to processOk and add in cancel com list handling
-
+var $gameBanks;
 function Scene_Bank() { this.initialize.apply(this,arguments); };
 function Window_BankDetails() { this.initialize.apply(this,arguments); };
 function Window_ActionPane() { this.initialize.apply(this,arguments); };
