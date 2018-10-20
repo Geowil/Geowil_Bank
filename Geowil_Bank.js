@@ -116,7 +116,7 @@ function Window_SellBondDetails() { this.initialize.apply(this,arguments); };
 
 (function(_) {
 	"use strict";
-
+	
 	const params = PluginManager.parameters('Geowil_Bank');
 
 	//Param Plugin Var
@@ -135,6 +135,14 @@ function Window_SellBondDetails() { this.initialize.apply(this,arguments); };
 	***********
 	*/
 
+	var DataManager_makeSaveContents = DataManager.makeSaveContents;
+	DataManager.makeSaveContents = function() {
+	    // A save data does not contain $gameTemp, $gameMessage, and $gameTroop.
+	    var contents = DataManager_makeSaveContents.call(this);
+	    contents.banks        = $gameBanks; //For GeoWil_BankPlugin
+	    return contents;
+	};
+	
 	function Bond() { this.initialize.apply(this,arguments); };
 	Bond.prototype.initialize = function() { this.initMembers(); };
 	Bond.prototype.createBond = function(bID, bName, bCost,bMValue, bMTime, bPrTime){
