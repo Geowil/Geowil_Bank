@@ -1,9 +1,9 @@
 # Geowil_Bank Plugin
-Version: 1.0.1
+Version: 2.0.1
 
-Demo Available: Yes, [Geowil_BankDemo.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_V1.1.1.zip)
+Demo Available: Yes, [Geowil_BankDemo.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_V2.0.1.zip)
 
-Project Available: Yes, [Geowil_BankProject.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_ProjectV1.1.1.zip)
+Project Available: Yes, [Geowil_BankProject.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_ProjectV2.0.1.zip)
 
 Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/Geowil_Bank#conflicts) section
 
@@ -19,20 +19,9 @@ This repository is for an RPG Maker MV JS plugin which allows the developer to c
 
 
 ## Installation Instructions
-First download all three files from this repository.  I have renamed the rpg_managers.js and rpg_objects.js files so that
-you will not overwrite your existing files.  There are changes in these files you must add to your existing files of the
-same name.
+Download the plugin js file and at least the ButtonSet.png image file.  If you want to alter the button set used in this plugin also download the psd file.  You must place the image file in the image folder in a folder named 'bank'.  Next, place the plugin js file into your plugins folder.
 
-In rpg_objects_.js you will need to find the Game_Banks class at the bottom of the file and copy/paste it into your
-rpg_objects.js file.
-
-In rpg_managers_.js the changes you will need to copy over to rpg_managers.js can be found by searching for '//For Geowil_BankPlugin'.
-Copy these to approximatly the same locations in your rpg_managers.js file.
-
-I will try to make future versions not require these first steps.
-
-Lastly just drop the Geowil_Bank.js file into your plugins folder and add the plugin to your project.
-
+You're done!
 
 
 ## How does it work?
@@ -41,25 +30,34 @@ bonds are enabled and the denomination of time to use (Ie. hours, minutes, days)
 bonds, all you have to do is put plugin commands into events where you want to access the bank(s) from.  You can
 use the same bank across your entire game or have each major location have its own.
 
-The plugin commands to open the bank are as follows:
+The plugin command to open the bank is as follows:
 
 ```
-BankOpen <BankID> <InterestRate>
-BankOpen <BankID> <InterestRate> <TimeDenomination>
+BankOpen <Params>
 ```
 
-where <BankID> is the ID for the bank you want to open and <InterestRate> is the interest rate for that bank.
-Future version of the plugin may either remove the InterestRate parameter or add a second BankOpen command that
-does not use it so that you can modify this value through a plugin command.
+The <Params> indicated the following:
+    ID:# - Required - Sets the bank id for a new bank or tells the plugin which existing bank to open
+    IR:# - Optional - Sets the interest rate at the bank.  Use this on an existing bank to change the interest rate of that bank
+    TD:<Seconds,Minutes,Hours,Days> - Optional - Sets the time denomination at which interest compounds.  Use this on an existing bank to change the time denomination at that bank
+    MD:# - Optional - Sets the minimum deposit amount at the bank.  Use on an existing bank to change the minimum deposit amount at that bank.
 
-The <TimeDenomination> option on the second command specifies what unit of time interest is compiled at or bond
-matures at.  Valid values are Second, Minutes, Hours, or Days.  All other input will be ignored.  This option does not
-change your bond help text messages to reflect the change in time unit so be sure to update any bonds if you already added them.
+Any params with 'Optional', when not used, will default to whatever you have set in your plugin parameters.  The ID: parameter is always required.  Some examples:
 
+BankOpen ID:0
+BankOpen ID:0 IR:10
+BankOpen ID:0 TD:Seconds MD:1000
+BankOpen ID:0 IR:15 TD:Minutes MD:15000
+
+Example 1: Opens a bank with plugin paramater defaults for all parameters
+Example 2: Opens a bank with a 10% interest rate and everything else defaults
+Example 3: Opens a bank with a time denomination of Seconds and a minimum deposit of 1000.  Interest rate will be the
+plugin default
+Example 4: Opens a bank with an interest rate of 15%, a time denomination of Minutes, and a minimum deposit of 15,000.
 
 
 ## Current Features Overview
-### Features in V1.0
+### Features in V2.0.1
 - Deposit Gold
     - Players are able to deposit gold into the bank.  If an interest rate is set then over the specified amount of time
     units (example hours) that interest rate will be comounded onto the deposited gold. As an example a deposit of
@@ -71,6 +69,8 @@ change your bond help text messages to reflect the change in time unit so be sur
     - Bonds are another way to allow a player to grow their gold through this plugin.  The player buys a bond and then after
     a set amount of time the bond matures and can be sold for a greater value.  The system can be turned on or off from the
     plugin settings or through a plugin command.
+- Minimum Deposits
+    - You can now set a minimum deposit amount that the player must meet to deposit any gold.
 
 
 ### Parameters
@@ -80,6 +80,8 @@ There are a total of six plugin parameters to customize the plugin with.  I will
     - Changes the text color on the gold counter when the user attempts to withdraw or deposit more gold that is available.
 - Invalid Bond Color
     - Changes the text color in the Sell Bond selection window for bonds which have not yet matured.
+- Font Size
+    - Changes the font size used in the plugin.
 - Gold Counter Button 1 Value
     - Sets the value for the single arrow up/down buttons in the gold counter window when depositing or withdrawing
     gold as well as the value of the left/right keyboard arrow keys.
@@ -95,6 +97,10 @@ There are a total of six plugin parameters to customize the plugin with.  I will
 - Time Denomination
     - Sets the default time unit setting for all banks.  Use the ChangeTimeUnit plugin command to alter this setting on
     a per-bank basis.
+= Default Interest
+    - Sets the default interest rate for new banks.  When you create a bank without the IR parameter, this value will be used.
+- Minimum Depo
+    - Sets the default minimum deposit amount for new banks.  When you create a bank without the MD parameter, this value will be used.
 
 
 ###Plugin Commands
@@ -105,17 +111,27 @@ The very first commands you should know about are used to open a bank.  These wi
 already exist or update certain values if the bank does exist and they are different.
 
 ```
-BankOpen <BankID> <InterestRate>
-BankOpen <BankID> <InterestRate> <TimeDenomination>
-
-Examples:
-BankOpen 0 10
-BankOpen 1 15 Minutes
+BankOpen <Params>
 ```
 
-The first BankOpen command simply opens a bank with the specified id and with the specified interest rate.  The second one
-will change the default time denomination setting from 'Time Denomination' in the plugin settings to whatever you enter
-for the <TimeDenomination> option.
+The <Params> indicated the following:
+    ID:# - Required - Sets the bank id for a new bank or tells the plugin which existing bank to open
+    IR:# - Optional - Sets the interest rate at the bank.  Use this on an existing bank to change the interest rate of that bank
+    TD:<Seconds,Minutes,Hours,Days> - Optional - Sets the time denomination at which interest compounds.  Use this on an existing bank to change the time denomination at that bank
+    MD:# - Optional - Sets the minimum deposit amount at the bank.  Use on an existing bank to change the minimum deposit amount at that bank.
+
+Any params with 'Optional', when not used, will default to whatever you have set in your plugin parameters.  The ID: parameter is always required.  Some examples:
+
+BankOpen ID:0
+BankOpen ID:0 IR:10
+BankOpen ID:0 TD:Seconds MD:1000
+BankOpen ID:0 IR:15 TD:Minutes MD:15000
+
+Example 1: Opens a bank with plugin paramater defaults for all parameters
+Example 2: Opens a bank with a 10% interest rate and everything else defaults
+Example 3: Opens a bank with a time denomination of Seconds and a minimum deposit of 1000.  Interest rate will be the
+plugin default
+Example 4: Opens a bank with an interest rate of 15%, a time denomination of Minutes, and a minimum deposit of 15,000.
 
 
 #### Adding/Updating Bonds
@@ -189,8 +205,6 @@ Example: Bank AddOverwrites Off
 
 
 ## Planned Features
-- Third BankOpen command with no additional options
-- A plugin command to adjust the interest rate
 - Stocks
 
 
@@ -205,6 +219,15 @@ conflict with this plugin without proper integration measures:
 
 
 ## Version Changelogs
+- Version 2.0.1 Changelog:
+  - Fixed a potential menu hang due to an invalid selection index.
+  - Updated the plugin button image to include a cancel button.
+  - Added a plugin parameter to control the font size used in the plugin
+  - Changed the BankOpen plugin command to be used with any number of parameters.
+  - Added a cancel button to the widthdraw and deposit windows.
+  - Added a minimum deposit feature.
+  - Added plugin parameters to set the default interest rate and minimum deposit values.
+  
 - Version 1.1.1 Changelog:
   - Fixed an issue where some plugin parameters might not have been working properly.
 
