@@ -38,13 +38,13 @@ BankOpen <Params>
 
 The <Params> indicated the following:
     
-    ID:# - Required - Sets the bank id for a new bank or tells the plugin which existing bank to open
-    
-    IR:# - Optional - Sets the interest rate at the bank.  Use this on an existing bank to change the interest rate of that bank
-    
-    TD:<Seconds,Minutes,Hours,Days> - Optional - Sets the time denomination at which interest compounds.  Use this on an existing bank to change the time denomination at that bank
-    
-    MD:# - Optional - Sets the minimum deposit amount at the bank.  Use on an existing bank to change the minimum deposit amount at that bank.
+ID:# - Required - Sets the bank id for a new bank or tells the plugin which existing bank to open
+
+IR:# - Optional - Sets the interest rate at the bank.  Use this on an existing bank to change the interest rate of that bank
+
+TD:<Seconds,Minutes,Hours,Days> - Optional - Sets the time denomination at which interest compounds.  Use this on an existing bank to change the time denomination at that bank
+
+MD:# - Optional - Sets the minimum deposit amount at the bank.  Use on an existing bank to change the minimum deposit amount at that bank.
 
 Any params with 'Optional', when not used, will default to whatever you have set in your plugin parameters.  The ID: parameter is always required.  Some examples:
 
@@ -127,13 +127,13 @@ BankOpen <Params>
 
 The <Params> indicated the following:
     
-    ID:# - Required - Sets the bank id for a new bank or tells the plugin which existing bank to open
-    
-    IR:# - Optional - Sets the interest rate at the bank.  Use this on an existing bank to change the interest rate of that bank
-    
-    TD:<Seconds,Minutes,Hours,Days> - Optional - Sets the time denomination at which interest compounds.  Use this on an existing bank to change the time denomination at that bank
-    
-    MD:# - Optional - Sets the minimum deposit amount at the bank.  Use on an existing bank to change the minimum deposit amount at that bank.
+ID:# - Required - Sets the bank id for a new bank or tells the plugin which existing bank to open
+
+IR:# - Optional - Sets the interest rate at the bank.  Use this on an existing bank to change the interest rate of that bank
+
+TD:<Seconds,Minutes,Hours,Days> - Optional - Sets the time denomination at which interest compounds.  Use this on an existing bank to change the time denomination at that bank
+
+MD:# - Optional - Sets the minimum deposit amount at the bank.  Use on an existing bank to change the minimum deposit amount at that bank.
 
 
 Any params with 'Optional', when not used, will default to whatever you have set in your plugin parameters.  The ID: parameter is always required.  Some examples:
