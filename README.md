@@ -37,22 +37,33 @@ BankOpen <Params>
 ```
 
 The <Params> indicated the following:
+    
     ID:# - Required - Sets the bank id for a new bank or tells the plugin which existing bank to open
+    
     IR:# - Optional - Sets the interest rate at the bank.  Use this on an existing bank to change the interest rate of that bank
+    
     TD:<Seconds,Minutes,Hours,Days> - Optional - Sets the time denomination at which interest compounds.  Use this on an existing bank to change the time denomination at that bank
+    
     MD:# - Optional - Sets the minimum deposit amount at the bank.  Use on an existing bank to change the minimum deposit amount at that bank.
 
 Any params with 'Optional', when not used, will default to whatever you have set in your plugin parameters.  The ID: parameter is always required.  Some examples:
 
 BankOpen ID:0
+
 BankOpen ID:0 IR:10
+
 BankOpen ID:0 TD:Seconds MD:1000
+
 BankOpen ID:0 IR:15 TD:Minutes MD:15000
 
+
 Example 1: Opens a bank with plugin paramater defaults for all parameters
+
 Example 2: Opens a bank with a 10% interest rate and everything else defaults
+
 Example 3: Opens a bank with a time denomination of Seconds and a minimum deposit of 1000.  Interest rate will be the
 plugin default
+
 Example 4: Opens a bank with an interest rate of 15%, a time denomination of Minutes, and a minimum deposit of 15,000.
 
 
@@ -115,22 +126,34 @@ BankOpen <Params>
 ```
 
 The <Params> indicated the following:
+    
     ID:# - Required - Sets the bank id for a new bank or tells the plugin which existing bank to open
+    
     IR:# - Optional - Sets the interest rate at the bank.  Use this on an existing bank to change the interest rate of that bank
+    
     TD:<Seconds,Minutes,Hours,Days> - Optional - Sets the time denomination at which interest compounds.  Use this on an existing bank to change the time denomination at that bank
+    
     MD:# - Optional - Sets the minimum deposit amount at the bank.  Use on an existing bank to change the minimum deposit amount at that bank.
+
 
 Any params with 'Optional', when not used, will default to whatever you have set in your plugin parameters.  The ID: parameter is always required.  Some examples:
 
 BankOpen ID:0
+
 BankOpen ID:0 IR:10
+
 BankOpen ID:0 TD:Seconds MD:1000
+
 BankOpen ID:0 IR:15 TD:Minutes MD:15000
 
+
 Example 1: Opens a bank with plugin paramater defaults for all parameters
+
 Example 2: Opens a bank with a 10% interest rate and everything else defaults
+
 Example 3: Opens a bank with a time denomination of Seconds and a minimum deposit of 1000.  Interest rate will be the
 plugin default
+
 Example 4: Opens a bank with an interest rate of 15%, a time denomination of Minutes, and a minimum deposit of 15,000.
 
 
