@@ -435,7 +435,7 @@ Game_Interpreter.prototype.pluginCommand = function(command, args){
 		matches = (/Bank[ ](\d+)[ ]BondSystemEnabled[ ](\d+)/.exec(command) || []);
 
 		$gameBanks.changeBondSystem(matches[1],matches[2]);
-	} else {
+	} else  if (command.match(/BankOpen/g)){
 		var match = [];
 		var match2 = [];
 		var bID = 0;
