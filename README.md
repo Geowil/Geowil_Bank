@@ -1,9 +1,9 @@
 # Geowil_Bank Plugin
-Version: 2.0.1
+Version: 2.0.2
 
-Demo Available: Yes, [Geowil_BankDemo.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_V2.0.1.zip)
+Demo Available: Yes, [Geowil_BankDemo.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_V2.0.2.zip)
 
-Project Available: Yes, [Geowil_BankProject.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_ProjectV2.0.1.zip)
+Project Available: Yes, [Geowil_BankProject.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_ProjectV2.0.2.zip)
 
 Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/Geowil_Bank#conflicts) section
 
@@ -242,6 +242,9 @@ conflict with this plugin without proper integration measures:
 
 
 ## Version Changelogs
+- Version 2.0.2 Changelog:
+  - Fixed an issue where any plugin command called would trigger the Bank scene to open. (BreakerZero)
+  
 - Version 2.0.1 Changelog:
   - Fixed a potential menu hang due to an invalid selection index.
   - Updated the plugin button image to include a cancel button.
