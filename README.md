@@ -1,7 +1,7 @@
 # Geowil_Bank Plugin
 Version: 2.0.2
 
-Demo Available: Yes, [Geowil_BankDemo.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_V2.0.2.zip)
+Demo Available: Yes, [Geowil_BankDemo.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemoV2.0.2.zip)
 
 Project Available: Yes, [Geowil_BankProject.zip](http://lmpgames.com/RMMV/Plugins/Geowil_BankDemo_ProjectV2.0.2.zip)
 
